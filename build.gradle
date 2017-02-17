@@ -1,0 +1,21 @@
+
+apply plugin: 'java'
+repositories {
+    mavenCentral()
+}
+dependencies {
+// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
+
+}
+
+task copyJars(type: Copy) {
+  from configurations.runtime
+  into '/lib' 
+}
+
+
+task createJavaProject << {
+      sourceSets*.java.srcDirs*.each { it.mkdirs() }
+        sourceSets*.resources.srcDirs*.each { it.mkdirs()}
+}
